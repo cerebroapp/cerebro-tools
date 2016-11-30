@@ -1,0 +1,30 @@
+{
+  "name": "cerebro-tools",
+  "version": "0.1.1",
+  "description": "Toolkit for developing plugins for Cerebro App",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "webpack",
+    "prepublish": "rm -rf ./dist && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kelion/cerebro-tools.git"
+  },
+  "author": "Alexandr Subbotin <kelionweb@gmail.com> (http://asubbotin.ru)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kelion/cerebro-tools/issues"
+  },
+  "homepage": "https://github.com/kelion/cerebro-tools#readme",
+  "dependencies": {
+    "escape-string-regexp": "^1.0.5",
+    "lodash.lowercase": "^4.3.0",
+    "memoizee": "^0.4.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.18.0",
+    "babel-loader": "^6.2.8",
+    "webpack": "2.1.0-beta.27"
+  }
+}
