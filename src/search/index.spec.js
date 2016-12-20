@@ -84,4 +84,10 @@ describe('search', () => {
     const term = '$'
     expect(search(items, term)).toEqual(items)
   })
+
+  it('searchs for empty string by default', () => {
+    const items = ['Facetime']
+    const term = null
+    expect(search(items, term)).toEqual(items)
+  })
 })

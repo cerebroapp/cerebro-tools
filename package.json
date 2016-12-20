@@ -1,6 +1,6 @@
 {
   "name": "cerebro-tools",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "Toolkit for developing plugins for Cerebro App",
   "main": "dist/index.js",
   "scripts": {
