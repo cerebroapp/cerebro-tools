@@ -1,6 +1,12 @@
 import memoize from '../memoize'
-import lowerCase from 'lodash.lowercase'
-import escapeStringRegexp from 'escape-string-regexp'
+const lowerCase = (str) => (
+  str
+    .replace(/[^а-яa-z0-9\s]/i, '')
+    .replace(/([а-яa-z])([A-ZА-Я])/g, (x,y,z) => [y, z].join(' ').toLowerCase())
+    .replace(/([^0-9])([0-9])/g, (x,y,z) => [y, z].join(' ').toLowerCase())
+    .toLowerCase()
+);
+const escapeStringRegexp = (str) => str.replace(/[|\\{}()[\]^$+*?.]/g, '\\$&')
 
 /**
  * Convert string to searchable lower-case string prepared for regexp search of search term

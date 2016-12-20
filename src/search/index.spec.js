@@ -61,7 +61,7 @@ describe('search', () => {
     expect(search(items, term)).toEqual(['1Password'])
   })
 
-  it("searchs for numbers in the begining of the end of word", () => {
+  it("searchs for numbers in the end of word", () => {
     const items = ['1Password', 'PS4 Remote']
     const term = '4'
     expect(search(items, term)).toEqual(['PS4 Remote'])
