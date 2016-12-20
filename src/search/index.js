@@ -1,16 +1,17 @@
-import memoize from '../memoize';
-import lowerCase from 'lodash.lowercase';
-import escapeStringRegexp from 'escape-string-regexp';
+import memoize from '../memoize'
+import lowerCase from 'lodash.lowercase'
+import escapeStringRegexp from 'escape-string-regexp'
 
 /**
  * Convert string to searchable lower-case string prepared for regexp search of search term
- * NOTE: lodash lowerCase convers `AppName` to `app name` (that we need),
- *       when standard js `.toLowerCase` converts it to `appname`.
  *
  * @param  {String} string
  * @return {String}
  */
-const toSearchString = memoize((string) => lowerCase(string));
+const toSearchString = memoize((string) => [
+  string.toLowerCase(),
+  lowerCase(string),
+].join(' '))
 
 /**
  * Get regexp for search term
@@ -18,7 +19,7 @@ const toSearchString = memoize((string) => lowerCase(string));
  * @param  {String} term
  * @return {Regexp}
  */
-const toSearchRegexp = memoize((term) => new RegExp(`(^|\\W)${escapeStringRegexp(toSearchString(term))}`));
+const toSearchRegexp = memoize((term) => new RegExp(`(^|[^a-zA-Zа-яА-Я0-9])${escapeStringRegexp(term.toString())}`))
 
 /**
  * Search term in array
@@ -28,8 +29,8 @@ const toSearchRegexp = memoize((term) => new RegExp(`(^|\\W)${escapeStringRegexp
  * @return {Array}
  */
 export default (items, term, toString = (item) => item) => {
-  const searchRegexp = toSearchRegexp(term);
+  const searchRegexp = toSearchRegexp(term)
   return items.filter(item =>
     toSearchString(toString(item)).match(searchRegexp)
-  );
-};
+  )
+}

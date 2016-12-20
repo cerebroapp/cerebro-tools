@@ -1,0 +1,4 @@
+--colors
+--reporter spec
+--webpack-config webpack.config.js
+src/**/*.spec.js
