@@ -25,7 +25,7 @@ const toSearchString = memoize((string) => [
  * @param  {String} term
  * @return {Regexp}
  */
-const toSearchRegexp = memoize((term) => new RegExp(`(^|[^a-zA-Zа-яА-Я0-9])${escapeStringRegexp(term.toString())}`))
+const toSearchRegexp = memoize((term) => new RegExp(`(^|[^a-zA-Zа-яА-Я0-9])${escapeStringRegexp(term.toLowerCase())}`))
 
 /**
  * Search term in array

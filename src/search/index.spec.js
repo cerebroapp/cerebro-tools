@@ -37,6 +37,12 @@ describe('search', () => {
     expect(search(items, term)).toEqual(items)
   })
 
+  it('is case insesetive for UpperCase', () => {
+    const items = ['FaceTime']
+    const term = 'Face'
+    expect(search(items, term)).toEqual(items)
+  })
+
   it('searchs for CamelCase', () => {
     const items = ['DaisyDisk']
     const term = 'dis'
