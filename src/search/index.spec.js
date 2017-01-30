@@ -31,10 +31,28 @@ describe('search', () => {
     expect(search(items, term)).toEqual(items)
   })
 
-  it('is case insesetive', () => {
-    const items = ['FaceTime']
-    const term = 'face'
-    expect(search(items, term)).toEqual(items)
+  context('case insesetive', () => {
+    const items = [
+      {
+        name: 'App Store',
+        filename: 'App Store.app'
+      },
+      {
+        name: 'App Store',
+        filename: 'App Store.prefPane'
+      }
+    ]
+    const toString = (app) => `${app.name} ${app.filename}`
+
+    it('with lowercase', () => {
+      const term = 'app'
+      expect(search(items, term, toString)).toEqual(items)
+    })
+
+    it('with uppercase', () => {
+      const term = 'App'
+      expect(search(items, term, toString)).toEqual(items)
+    })
   })
 
   it('is case insesetive for UpperCase', () => {
@@ -94,6 +112,12 @@ describe('search', () => {
   it('searchs for empty string by default', () => {
     const items = ['Facetime']
     const term = null
+    expect(search(items, term)).toEqual(items)
+  })
+
+  it('searchs for full match', () => {
+    const items = ['Facetime']
+    const term = 'Facetime'
     expect(search(items, term)).toEqual(items)
   })
 })
