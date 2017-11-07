@@ -1,12 +1,16 @@
 import memoize from '../memoize'
+const rx1 = /[^а-яa-z0-9\s]/i
+const rx2 = /([а-яa-z])([A-ZА-Я])/g
+const rx3 = /([^0-9])([0-9])/g
 const lowerCase = (str) => (
   str
-    .replace(/[^а-яa-z0-9\s]/i, '')
-    .replace(/([а-яa-z])([A-ZА-Я])/g, (x,y,z) => [y, z].join(' ').toLowerCase())
-    .replace(/([^0-9])([0-9])/g, (x,y,z) => [y, z].join(' ').toLowerCase())
+    .replace(rx1, '')
+    .replace(rx2, (x,y,z) => [y, z].join(' ').toLowerCase())
+    .replace(rx3, (x,y,z) => [y, z].join(' ').toLowerCase())
     .toLowerCase()
 );
-const escapeStringRegexp = (str) => str.replace(/[|\\{}()[\]^$+*?.]/g, '\\$&')
+const rx4 = /[|\\{}()[\]^$+*?.]/g
+const escapeStringRegexp = (str) => str.replace(rx4, '\\$&')
 
 /**
  * Convert string to searchable lower-case string prepared for regexp search of search term
