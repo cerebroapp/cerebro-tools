@@ -1,12 +1,18 @@
 import memoize from '../memoize'
+
+const notSearchableCharsRegexp = /[^а-яa-z0-9\s]/i
+const camelCaseRegexp = /([а-яa-z])([A-ZА-Я])/g
+const wordsWithNumbersRegexp = /([^0-9])([0-9])/g
+const escapeRegexp = /[|\\{}()[\]^$+*?.]/g
+
 const lowerCase = (str) => (
   str
-    .replace(/[^а-яa-z0-9\s]/i, '')
-    .replace(/([а-яa-z])([A-ZА-Я])/g, (x,y,z) => [y, z].join(' ').toLowerCase())
-    .replace(/([^0-9])([0-9])/g, (x,y,z) => [y, z].join(' ').toLowerCase())
+    .replace(notSearchableCharsRegexp, '')
+    .replace(camelCaseRegexp, (x,y,z) => [y, z].join(' ').toLowerCase())
+    .replace(wordsWithNumbersRegexp, (x,y,z) => [y, z].join(' ').toLowerCase())
     .toLowerCase()
-);
-const escapeStringRegexp = (str) => str.replace(/[|\\{}()[\]^$+*?.]/g, '\\$&')
+)
+const escapeStringRegexp = (str) => str.replace(escapeRegexp, '\\$&')
 
 /**
  * Convert string to searchable lower-case string prepared for regexp search of search term
