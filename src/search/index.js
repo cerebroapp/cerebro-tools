@@ -31,12 +31,11 @@ const toSearchRegexp = memoize((term) => new RegExp(`(^|[^a-zA-Zа-яА-Я0-9])$
  * Search term in array
  * @param  {Array} items Array of items
  * @param  {String} term Search term
- * @param  {Function} toString Function that converts item from array to string
  * @return {Array}
  */
-export default (items, term, toString = (item) => item) => {
+export default (items, term) => {
   const searchRegexp = toSearchRegexp(term || '')
   return items.filter(item =>
-    toSearchString(toString(item)).match(searchRegexp)
+    toSearchString(item.searchString).match(searchRegexp)
   )
 }
