@@ -11,7 +11,7 @@ module.exports = {
     filename: 'index.js'
   },
   resolve: {
-    extensions: ['.js'],
+    extensions: ['.js', '.json'],
     modules: [
       path.resolve('./src'),
       path.resolve('./node_modules'),
